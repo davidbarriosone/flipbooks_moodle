@@ -1,0 +1,211 @@
+#flipbook-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    text-align: center;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Modo pantalla completa */
+#flipbook-container.fullscreen-mode {
+    max-width: 100%;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    padding: 20px;
+    background: #2c2c2c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#flipbook-container.fullscreen-mode #flipbook {
+    background: #1a1a1a;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: calc(100vh - 120px);
+}
+
+#flipbook-container.fullscreen-mode #controls {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#flipbook-container.fullscreen-mode #page-info {
+    color: white;
+    font-size: 20px;
+}
+
+#flipbook {
+    margin: 0 auto 20px;
+    position: relative;
+    background: #333;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#flipbook .page {
+    background-color: white;
+    background-size: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#flipbook .page canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+/* Estilos específicos para Turn.js */
+.turn-page {
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.turn-page-wrapper {
+    background: white;
+}
+
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+#controls button {
+    background: #0066cc;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+#controls button:hover:not(:disabled) {
+    background: #0052a3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#controls button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+#controls button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Botón de pantalla completa */
+#fullscreen-btn {
+    background: #28a745;
+}
+
+#fullscreen-btn:hover {
+    background: #218838;
+}
+
+#flipbook-container.fullscreen-mode #fullscreen-btn {
+    background: #dc3545;
+}
+
+#flipbook-container.fullscreen-mode #fullscreen-btn:hover {
+    background: #c82333;
+}
+
+#page-info {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    min-width: 150px;
+    padding: 0 10px;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    #flipbook-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    #flipbook-container {
+        padding: 10px;
+    }
+    
+    #flipbook {
+        padding: 10px;
+    }
+    
+    #controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #controls button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    #page-info {
+        order: -1;
+        margin-bottom: 10px;
+    }
+    
+    /* En móviles, ajustar modo pantalla completa */
+    #flipbook-container.fullscreen-mode #controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    #flipbook-container.fullscreen-mode #controls button {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}
+
+/* Evitar selección de texto durante el flip */
+#flipbook * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Animación suave al cambiar de tamaño */
+#flipbook {
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* Cursor durante el hover en las páginas */
+#flipbook .page {
+    cursor: grab;
+}
+
+#flipbook .page:active {
+    cursor: grabbing;
+}
