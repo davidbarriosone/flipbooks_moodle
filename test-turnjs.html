@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Turn.js - Flipbook</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        #status {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #flipbook {
+            margin: 20px auto;
+            background: #333;
+            padding: 20px;
+        }
+        .page {
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .ok { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+    </style>
+</head>
+<body>
+    <h1>Test de Turn.js para Flipbook</h1>
+    
+    <div id="status">
+        <h2>Estado de las librerías:</h2>
+        <div id="jquery-status">Verificando jQuery...</div>
+        <div id="turnjs-status">Verificando Turn.js...</div>
+        <div id="pdfjs-status">Verificando PDF.js...</div>
+    </div>
+
+    <div id="flipbook">
+        <div class="page">Página 1</div>
+        <div class="page">Página 2</div>
+        <div class="page">Página 3</div>
+    </div>
+
+    <!-- Cargar jQuery desde Moodle o CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Cargar Turn.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+    
+    <!-- Cargar PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <script>
+        // Verificar jQuery
+        setTimeout(() => {
+            const jqueryStatus = document.getElementById('jquery-status');
+            if (typeof jQuery !== 'undefined') {
+                jqueryStatus.innerHTML = '<span class="ok">✓ jQuery cargado correctamente (versión ' + jQuery.fn.jquery + ')</span>';
+            } else {
+                jqueryStatus.innerHTML = '<span class="error">✗ jQuery NO cargado</span>';
+            }
+
+            // Verificar Turn.js
+            const turnjsStatus = document.getElementById('turnjs-status');
+            if (typeof jQuery !== 'undefined' && typeof jQuery.fn.turn !== 'undefined') {
+                turnjsStatus.innerHTML = '<span class="ok">✓ Turn.js cargado correctamente</span>';
+                
+                // Inicializar Turn.js
+                try {
+                    jQuery('#flipbook').turn({
+                        width: 800,
+                        height: 600,
+                        autoCenter: true,
+                        display: 'double'
+                    });
+                    turnjsStatus.innerHTML += '<br><span class="ok">✓ Turn.js inicializado exitosamente</span>';
+                } catch (error) {
+                    turnjsStatus.innerHTML += '<br><span class="error">✗ Error al inicializar Turn.js: ' + error.message + '</span>';
+                }
+            } else {
+                turnjsStatus.innerHTML = '<span class="error">✗ Turn.js NO cargado</span>';
+            }
+
+            // Verificar PDF.js
+            const pdfjsStatus = document.getElementById('pdfjs-status');
+            if (typeof pdfjsLib !== 'undefined') {
+                pdfjsStatus.innerHTML = '<span class="ok">✓ PDF.js cargado correctamente</span>';
+            } else {
+                pdfjsStatus.innerHTML = '<span class="error">✗ PDF.js NO cargado</span>';
+            }
+        }, 500);
+    </script>
+</body>
+</html>
